@@ -1,0 +1,30 @@
+const bodyParser = require("body-parser");
+const express = require("express");
+const session = require("express-session");
+const cookieParser = require("cookie-parser");
+const router = require("./router.js");
+const dotenv = require("dotenv");
+const db = require("./utils/Database.js");
+
+dotenv.config();
+db.connect();
+
+const app = express();
+
+app.set('view engine', 'ejs');
+app.set('trust proxy', 1);
+app.use(session({
+    secret: 'secret-key',
+    resave: false,
+    saveUninitialized: true
+}));
+
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(cookieParser());
+
+router(app);
