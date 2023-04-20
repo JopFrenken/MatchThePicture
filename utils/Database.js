@@ -51,14 +51,17 @@ const $ = {
             let result = await query(`SELECT * FROM users WHERE name = '${name}' limit 1`)
             return result.length > 0 ? result[0] : false
         },
-        // GET_MULTIPLE: async (email) => {
-        //     let result = await query(`SELECT * FROM users WHERE email = '${email}'`)
-        //     return result.length > 0 ? result : false
-        // },
-        // CREATE: async (options) => {
-        //     let result = await query(`INSERT INTO users (name, email, password) VALUES ('${options.name}', '${options.email}', '${options.password}')`)
-        // }
+
+        SEND_SCORE: async (data) => {
+            let result = await query(`INSERT INTO users (name, seconds_left) VALUES ('${data.name}', '${data.time}')`)
+        },
     },
+    COUNTRIES: {
+        GET_ALL: async () => {
+            let result = await query('SELECT * FROM images');
+            return result.length > 0 ? result : false
+        }
+    }
 }
 
 module.exports = {

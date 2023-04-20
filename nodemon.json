@@ -1,5 +1,7 @@
 {
     "watch": [
+        "api.js",
+        "router.js",
         "server.js",
         "nodemon.json"
     ],

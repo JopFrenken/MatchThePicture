@@ -1,0 +1,31 @@
+.flag{
+    width: 220px;
+    height: 150px;
+    /* border: 2px solid black;    */
+}
+
+.quiz-question-container  {
+    display: grid;
+    gap: 15px;
+}
+
+.right-container{
+    border: 10px;
+}   
+
+.question-wrapper{
+    border: 5px solid black;
+}
+
+.reset-border {
+    border: 5px solid black !important;
+}
+
+.box{
+    transition-duration: 150ms;
+}
+
+.box:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
