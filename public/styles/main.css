@@ -1,7 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+
+body{
+    background-image: url('../images/background.svg');
+    background-position: center bottom;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+}
+
 .flag{
     width: 220px;
     height: 150px;
-    /* border: 2px solid black;    */
+    object-fit:cover ;
+    border: 5px solid black;   
+    border-radius: 1rem;
 }
 
 .quiz-question-container  {
@@ -15,6 +27,9 @@
 
 .question-wrapper{
     border: 5px solid black;
+    border-radius: 1rem;
+    width: 220px;
+    background-color: rgb(255,255,255,0.8);
 }
 
 .reset-border {
@@ -22,10 +37,22 @@
 }
 
 .box{
+    border-radius: 1rem;
     transition-duration: 150ms;
 }
 
 .box:hover{
     cursor: pointer;
-    transform: scale(1.1);
+    box-shadow: 0 0 0 5px white;
+}
+
+.title-container{
+    padding: 15px;
+    border: 5px solid black;
+    border-radius: 15px;
+    background-color: white;
+}
+
+.timer{
+    font-family: 'Orbitron', sans-serif;
 }

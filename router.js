@@ -5,6 +5,7 @@ module.exports = (app) => {
     
     app.get([ '/' ], async (req, res) => {
         let images = await db.$.COUNTRIES.GET_ALL();
+        let users = await db.$.USER.GET_ALL();
 
         const flags = images.map(image => { 
             return {
@@ -22,7 +23,8 @@ module.exports = (app) => {
 
         res.render('home', {
             flags,
-            questions
+            questions,
+            users: users || []
         });
     });
 

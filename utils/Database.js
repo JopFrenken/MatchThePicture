@@ -47,9 +47,9 @@ const query = async (sql) => {
 const $ = {
     // db.$.user.GET_ONE()
     USER: {
-        GET_ONE: async (name) => {
-            let result = await query(`SELECT * FROM users WHERE name = '${name}' limit 1`)
-            return result.length > 0 ? result[0] : false
+        GET_ALL: async (name) => {
+            let result = await query(`SELECT * FROM users ORDER BY seconds_left DESC LIMIT 3`)
+            return result.length > 0 ? result : false
         },
 
         SEND_SCORE: async (data) => {

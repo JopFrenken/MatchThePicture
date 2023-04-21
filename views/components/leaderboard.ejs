@@ -1,0 +1,19 @@
+<h1>Leaderboard</h1>
+<table class="table leaderboard">
+  <thead>
+    <tr>
+      <th class="py-2">Rank</th>
+      <th class="py-2">Name</th>
+      <th class="py-2">Time Left</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.forEach((user, index) => { %>
+    <tr>
+      <td class="py-2"><%= index + 1 %>.</td>
+      <td class="py-2"><%= user.name %></td>
+      <td class="py-2"><%= user.seconds_left %> seconds</td>
+    </tr>
+    <% }) %>
+  </tbody>
+</table>
