@@ -17,26 +17,30 @@ let clickedType = null; // initially, no element has been clicked
 const clickFunction = () => {
   allBoxes.forEach((box) => {
     box.addEventListener('click' , (e) => {
+      let target = e.target;
+      if (target.tagName === 'IMG') {
+        target = target.parentElement;
+      }
+
       // only sets timer once.
       if (gameStarted === false) {
         timerFunction();
       }
       gameStarted = true;
-      const isoValue = e.target.dataset.iso;
+      const isoValue = target.dataset.iso;
 
       // check if the user has already clicked an element of the same type
       if (clickedType === e.target.tagName) {
         toastr.warning("You can only click on 1 flag and 1 question.", {timeOut: 2000});
-        box.
         return;
       }
 
       // Highlight the clicked element
-      e.target.style.border = "3px dotted red";
+      target.style.border = "3px dotted red";
 
-      if (elementArr.includes(e.target)) {
+      if (elementArr.includes(target)) {
         // If the element has already been clicked, remove it from the clicked array and the element array
-        const index = elementArr.indexOf(e.target);
+        const index = elementArr.indexOf(target);
         clickedArr.splice(index, 1);
         elementArr.splice(index, 1);
 
@@ -47,13 +51,13 @@ const clickFunction = () => {
 
       // Add the ISO value and the clicked element to their respective arrays
       clickedArr.push(isoValue);
-      elementArr.push(e.target);
+      elementArr.push(target);
 
       // update clickedType
       clickedType = e.target.tagName;
 
       // removes this class so it can be red again
-      e.target.classList.remove('reset-border');
+      target.classList.remove('reset-border');
 
       if (clickedArr.length === 2 && elementArr.length == 2) {
         // If they have the same data attribute, call winlogic
@@ -87,6 +91,7 @@ const winLogic = (element, element2) => {
     // makes it unclickable
     element.style.pointerEvents = "none";
     element2.style.pointerEvents = "none";
+
 
     // if all elements are found
     if(foundElementsArr.length == 10) {
@@ -126,24 +131,26 @@ const winLogic = (element, element2) => {
 const resetGame = () => {
   time = 30;
   timer.textContent = '30s';
+  // dynamically updates leaderboard
   getLeaderboard();
   gameStarted = false;
   buttonClickedOnce = false;
   
+  // reshuffles to randomize again
   reshuffle(".right-container");
   reshuffle(".left-container");
 
-  foundElementsArr.forEach((element) => {
+  allBoxes.forEach((element) => {
+    // remove found css of all elements
     element.style.filter = "blur(0px)";
     element.style.pointerEvents = "auto";  
     element.style.border = "5px solid black";
   })
 
-  allFlags.forEach((el) => {
-    el.style.border = "5px solid black"
-  })
-
   foundElementsArr = [];
+  clickedArr = [];
+  elementArr = [];
+  clickedType = null;
 }
 
 const reshuffle = (container) => {

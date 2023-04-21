@@ -29,12 +29,8 @@
       <div class="entire-quiz-container d-flex w-100 justify-content-around">
         <div class="left-container quiz-question-container">
           <% flags.forEach((flag) => {%>
-          <div class="flag-wrapper box">
-            <img
-              src="<%= flag.image %>"
-              class="flag"
-              data-iso="<%= flag.attribute %>"
-            />
+          <div class="flag-wrapper box" data-iso="<%= flag.attribute %>">
+            <img src="<%= flag.image %>" class="flag" />
           </div>
           <% }) %>
         </div>

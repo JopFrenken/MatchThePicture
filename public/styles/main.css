@@ -8,12 +8,16 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+.flag-wrapper{
+    border: 5px solid black;   
+
+}
+
 .flag{
+    object-fit: cover;
     width: 220px;
     height: 150px;
-    object-fit:cover ;
-    border: 5px solid black;   
-    border-radius: 1rem;
+    border-radius: 0.6rem;
 }
 
 .quiz-question-container  {
