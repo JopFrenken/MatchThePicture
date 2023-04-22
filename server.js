@@ -1,3 +1,9 @@
+/**
+ * Main entry point for the web server application.
+ * 
+ * This file sets up the Express application instance, including middleware 
+ */ 
+
 const bodyParser = require("body-parser");
 const express = require("express");
 const session = require("express-session");

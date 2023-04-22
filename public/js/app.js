@@ -7,7 +7,7 @@ let timer = document.querySelector('.timer');
 let clickedArr = [];
 let elementArr = [];
 let foundElementsArr = [];
-let time = 5;
+let time = 30;
 let timerInterval;
 let gameStarted = false;
 let buttonClickedOnce = false;
@@ -36,7 +36,7 @@ const clickFunction = () => {
       }
 
       // Highlight the clicked element
-      target.style.border = "3px dotted red";
+      target.style.boxShadow = "0 0 0 5px rgb(228, 64, 214)";
 
       if (elementArr.includes(target)) {
         // If the element has already been clicked, remove it from the clicked array and the element array
@@ -56,9 +56,6 @@ const clickFunction = () => {
       // update clickedType
       clickedType = e.target.tagName;
 
-      // removes this class so it can be red again
-      target.classList.remove('reset-border');
-
       if (clickedArr.length === 2 && elementArr.length == 2) {
         // If they have the same data attribute, call winlogic
         if (elementArr[0].dataset.iso === elementArr[1].dataset.iso) {
@@ -67,10 +64,8 @@ const clickFunction = () => {
           winLogic(elementArr[0], elementArr[1]);
         } else {
           toastr.warning("No match", {timeOut: 2000});
-          elementArr.forEach((element) => {
-            element.classList.add('reset-border');
-            element.style.border= "none";
-          });
+          elementArr[0].style.boxShadow = "none";
+          elementArr[1].style.boxShadow = "none";
         }
         // Reset the clicked array and the element array
         clickedArr = [];
@@ -84,14 +79,13 @@ const clickFunction = () => {
 
 
 const winLogic = (element, element2) => {
-    element.style.border = "none";
-    element2.style.border = "none";
     element.style.filter = "blur(8px)";
     element2.style.filter = "blur(8px)";
+    element.style.boxShadow = "none";
+    element2.style.boxShadow = "none";
     // makes it unclickable
     element.style.pointerEvents = "none";
     element2.style.pointerEvents = "none";
-
 
     // if all elements are found
     if(foundElementsArr.length == 10) {
@@ -116,6 +110,7 @@ const winLogic = (element, element2) => {
                     }
                     })
                     .then(response =>{
+                      // resets game after score has been saved succesfully
                         toastr.success("Score has been saved.", "Success", {timeOut: 3000});
                         $("#my-modal").modal("hide");
                         resetGame();
@@ -142,9 +137,9 @@ const resetGame = () => {
 
   allBoxes.forEach((element) => {
     // remove found css of all elements
+    element.style.boxShadow = "none";
     element.style.filter = "blur(0px)";
     element.style.pointerEvents = "auto";  
-    element.style.border = "5px solid black";
   })
 
   foundElementsArr = [];
@@ -153,6 +148,7 @@ const resetGame = () => {
   clickedType = null;
 }
 
+// reshuffle flags and questions after won/timer ended
 const reshuffle = (container) => {
     container = document.querySelector(container);
     const elements = Array.from(container.children);
@@ -165,12 +161,15 @@ const reshuffle = (container) => {
     elements.forEach((element) => container.appendChild(element));
   };
 
+
+// updates leaderboard after score has been put in
 const getLeaderboard = async () => {
   const response = await fetch("/api/leaderboard");
   const html = await response.text();
   document.querySelector('.leaderboard-container').innerHTML = html;
 }
 
+// timer logic, resets when time is 0
 let timerFunction = () => {
   timerInterval = setInterval(() => {
     time--;

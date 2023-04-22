@@ -1,12 +1,15 @@
 const apiRouter = require("./api.js");
 const db = require("./utils/Database.js");
 
+// routes for the app
 module.exports = (app) => {
-    
+    // homepage route
     app.get([ '/' ], async (req, res) => {
+        // gets users and images from db
         let images = await db.$.COUNTRIES.GET_ALL();
         let users = await db.$.USER.GET_ALL();
 
+        // randomizes flag and questions from db
         const flags = images.map(image => { 
             return {
                 image: image.image,
@@ -21,6 +24,7 @@ module.exports = (app) => {
             }
         }).sort(() => Math.random() - 0.5);
 
+        // renders home with shuffled data
         res.render('home', {
             flags,
             questions,
@@ -28,13 +32,12 @@ module.exports = (app) => {
         });
     });
 
-    // app.get([ '/test' ], async (req, res) => {
-    //     let user = await db.$.USER.GET_ONE("jop");
-    //     res.render('test', {
-    //         username: user.name
-    //     })
-    // })
+    // wildcard route, any route that doesn't match the others will render this
+    app.get('*', (req, res) => {
+        res.render('404')
+    })
     
+    // starts app server
     apiRouter(app);
     app.listen(3000, () => {
         console.log("Server running on http://localhost:3000");

@@ -18,7 +18,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script defer src="js/app.js"></script>
     <link rel="stylesheet" href="styles/main.css" />
-    <title>Document</title>
+    <title>Match the picture</title>
+    <link rel="icon" href="/images/favicon.svg" />
   </head>
   <body>
     <%- include('components/winModal.ejs') %>
@@ -34,7 +35,9 @@
           </div>
           <% }) %>
         </div>
-        <div class="middle-container d-flex flex-column justify-content-around">
+        <div
+          class="middle-container d-flex flex-column justify-content-md-around justify-content-start"
+        >
           <%- include('components/timer.ejs') %>
           <div class="leaderboard-container">
             <%- include('components/leaderboard.ejs') %>
@@ -46,7 +49,7 @@
             data-iso="<%= question.attribute %>"
             class="question-wrapper box text-center p-2 d-flex justify-content-center align-items-center"
           >
-            <%= question.question %>
+            <span class="question"><%= question.question %></span>
           </div>
           <% }) %>
         </div>

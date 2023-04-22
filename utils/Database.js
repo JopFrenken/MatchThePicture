@@ -8,10 +8,13 @@
 
 const mysql = require('mysql');
 const dotenv = require('dotenv');
-dotenv.config()
 
-let conn
+// environment variables from env file
+dotenv.config();
 
+let conn;
+
+// connect to database
 const connect = async () => {
     conn = mysql.createConnection({
         host: process.env.DATABASE_HOST,
@@ -35,6 +38,7 @@ const connect = async () => {
     })
 }
 
+// query function
 const query = async (sql) => {
     return new Promise((resolve, reject) => {
         conn.query(sql, (err, result) => {
@@ -44,8 +48,8 @@ const query = async (sql) => {
     })
 }
 
+// database methods
 const $ = {
-    // db.$.user.GET_ONE()
     USER: {
         GET_ALL: async (name) => {
             let result = await query(`SELECT * FROM users ORDER BY seconds_left DESC LIMIT 3`)

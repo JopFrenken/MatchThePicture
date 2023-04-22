@@ -1,18 +1,18 @@
-<h1>Leaderboard</h1>
+<h1 class="text-light">Leaderboard</h1>
 <table class="table leaderboard">
   <thead>
     <tr>
-      <th class="py-2">Rank</th>
-      <th class="py-2">Name</th>
-      <th class="py-2">Time Left</th>
+      <th class="py-2 text-light">Rank</th>
+      <th class="py-2 text-light">Name</th>
+      <th class="py-2 text-light">Time Left</th>
     </tr>
   </thead>
   <tbody>
     <% users.forEach((user, index) => { %>
     <tr>
-      <td class="py-2"><%= index + 1 %>.</td>
-      <td class="py-2"><%= user.name %></td>
-      <td class="py-2"><%= user.seconds_left %> seconds</td>
+      <td class="py-2 text-light"><%= index + 1 %>.</td>
+      <td class="py-2 text-light"><%= user.name %></td>
+      <td class="py-2 text-light"><%= user.seconds_left %> seconds</td>
     </tr>
     <% }) %>
   </tbody>
