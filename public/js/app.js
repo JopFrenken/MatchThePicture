@@ -17,11 +17,7 @@ let clickedType = null; // initially, no element has been clicked
 const clickFunction = () => {
   allBoxes.forEach((box) => {
     box.addEventListener('click' , (e) => {
-      let target = e.target;
-      if (target.tagName === 'IMG') {
-        target = target.parentElement;
-      }
-
+      let target = box;
       // only sets timer once.
       if (gameStarted === false) {
         timerFunction();
@@ -30,7 +26,7 @@ const clickFunction = () => {
       const isoValue = target.dataset.iso;
 
       // check if the user has already clicked an element of the same type
-      if (clickedType === e.target.tagName) {
+      if (clickedType === target.tagName) {
         toastr.warning("You can only click on 1 flag and 1 question.", {timeOut: 2000});
         return;
       }

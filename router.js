@@ -33,8 +33,12 @@ module.exports = (app) => {
     });
 
     // wildcard route, any route that doesn't match the others will render this
-    app.get('*', (req, res) => {
-        res.render('404')
+    app.use((req, res, next) => {
+        // ignores api calls
+        if(req.path.startsWith('/api')) {
+            return next();
+        }
+        res.status(404).render('404');
     })
     
     // starts app server
